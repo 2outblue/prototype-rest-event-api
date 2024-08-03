@@ -5,6 +5,7 @@ import com.example.testapi.model.dto.EventDTO;
 import com.example.testapi.model.entity.Event;
 import com.example.testapi.model.mapper.EventMapper;
 import com.example.testapi.repository.EventRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,10 @@ public class EventService {
             return Optional.empty();
         }
         return Optional.of(eventMapper.toDto(eventEntity.get()));
+    }
+
+    @Transactional
+    public void deleteEventByUuid(UUID uuid) {
+        eventRepository.deleteByUuid(uuid);
     }
 }
