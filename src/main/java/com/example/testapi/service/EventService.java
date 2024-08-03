@@ -2,6 +2,7 @@ package com.example.testapi.service;
 
 
 import com.example.testapi.model.dto.EventDTO;
+import com.example.testapi.model.dto.UpdateEventDTO;
 import com.example.testapi.model.entity.Event;
 import com.example.testapi.model.mapper.EventMapper;
 import com.example.testapi.repository.EventRepository;
@@ -51,6 +52,17 @@ public class EventService {
         event.setUuid(UUID.randomUUID());
 
         eventRepository.save(event);
-        return eventDTO.getUuid();
+        return event.getUuid();
+    }
+
+    public boolean updateEvent(UpdateEventDTO updateEventDTO, UUID uuid) {
+        Optional<Event> eventEntity = eventRepository.findByUuid(uuid);
+        if (eventEntity.isEmpty()) {
+            return false;
+        }
+
+        Event updatedEvent = eventMapper.updateEntityFromDTO(eventEntity.get(), updateEventDTO);
+        eventRepository.save(updatedEvent);
+        return true;
     }
 }

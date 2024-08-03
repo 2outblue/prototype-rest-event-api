@@ -2,6 +2,7 @@ package com.example.testapi.web;
 
 
 import com.example.testapi.model.dto.EventDTO;
+import com.example.testapi.model.dto.UpdateEventDTO;
 import com.example.testapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,8 +58,19 @@ public class EventController {
         UUID newEventUuid = eventService.addEvent(eventDTO);
 
         return ResponseEntity.created(
-                uriBuilder.path("/api/event/{uuid}").build(newEventUuid)
+                uriBuilder.path("/api/event/{newEventUuid}").build(newEventUuid)
         ).build();
     }
 
+    @PatchMapping("/{uuid}")
+    public ResponseEntity<UpdateEventDTO> updateEvent(
+            @RequestBody UpdateEventDTO updateEventDTO,
+            @PathVariable UUID uuid,
+            UriComponentsBuilder uriBuilder) {
+
+        boolean updated = eventService.updateEvent(updateEventDTO, uuid);
+
+        return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+
+    }
 }
