@@ -32,12 +32,12 @@ public class DBInit implements CommandLineRunner {
     private void initEvents(){
         List<Event> events = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i < 6; i++) {
             events.add(new Event()
                     .setUuid(UUID.randomUUID())
                     .setDescription(String.format("Event # %d # Description", i))
                     .setName(String.format("Event @ %d @ Name", i))
-                    .setDate(LocalDate.now())
+                    .setDate(LocalDate.of(2024, 8, 5 + i))
                     .setTickets(10 * i)
                     .setHallId(UUID.randomUUID())
                     .setUserId(UUID.randomUUID())
