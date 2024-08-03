@@ -6,10 +6,11 @@ import java.util.UUID;
 public class UpdateEventDTO {
 
 
+    //TODO - perhaps add ability to change date, which will be possible only with Admin privileges?
     private String description;
     private String name;
 
-    private int tickets;
+    private Integer tickets;
 
 
     public String getDescription() {
@@ -30,11 +31,12 @@ public class UpdateEventDTO {
         return this;
     }
 
-    public int getTickets() {
+
+    public Integer getTickets() {
         return tickets;
     }
 
-    public UpdateEventDTO setTickets(int tickets) {
+    public UpdateEventDTO setTickets(Integer tickets) {
         this.tickets = tickets;
         return this;
     }

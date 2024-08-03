@@ -65,8 +65,7 @@ public class EventController {
     @PatchMapping("/{uuid}")
     public ResponseEntity<UpdateEventDTO> updateEvent(
             @RequestBody UpdateEventDTO updateEventDTO,
-            @PathVariable UUID uuid,
-            UriComponentsBuilder uriBuilder) {
+            @PathVariable UUID uuid) {
 
         boolean updated = eventService.updateEvent(updateEventDTO, uuid);
 
