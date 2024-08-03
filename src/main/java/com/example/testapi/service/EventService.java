@@ -29,16 +29,7 @@ public class EventService {
     }
 
     public List<EventDTO> getAllEvents() {
-        return eventRepository.findAll().stream().map(entity -> {
-             return new EventDTO()
-                    .setUuid(entity.getUuid())
-                    .setName(entity.getName())
-                    .setDescription(entity.getDescription())
-                    .setDate(entity.getDate())
-                    .setTickets(entity.getTickets())
-                    .setHallId(entity.getHallId())
-                    .setUserId(entity.getUserId());
-        }).collect(Collectors.toList());
+        return eventRepository.findAll().stream().map(eventMapper::toDto).collect(Collectors.toList());
     }
 
     public Optional<EventDTO> getEventByUuid(UUID uuid) {
@@ -53,5 +44,13 @@ public class EventService {
     @Transactional
     public void deleteEventByUuid(UUID uuid) {
         eventRepository.deleteByUuid(uuid);
+    }
+
+    public UUID addEvent(EventDTO eventDTO) {
+        Event event = eventMapper.toEntity(eventDTO);
+        event.setUuid(UUID.randomUUID());
+
+        eventRepository.save(event);
+        return eventDTO.getUuid();
     }
 }
