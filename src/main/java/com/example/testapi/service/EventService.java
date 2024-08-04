@@ -10,9 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +28,9 @@ public class EventService {
     }
 
     public List<EventDTO> getAllEvents() {
-        return eventRepository.findAll().stream().map(eventMapper::toDto).collect(Collectors.toList());
+        List<Event> eventEntities = eventRepository.findAll();
+
+        return mapToDTOs(eventEntities);
     }
 
     public Optional<EventDTO> getEventByUuid(UUID uuid) {
@@ -64,5 +64,25 @@ public class EventService {
         Event updatedEvent = eventMapper.updateEntityFromDTO(eventEntity.get(), updateEventDTO);
         eventRepository.save(updatedEvent);
         return true;
+    }
+
+
+    public List<EventDTO> getEventsByUserUuid(UUID userUuid) {
+        List<Event> eventEntities = eventRepository.findAllByUserId(userUuid);
+
+        return mapToDTOs(eventEntities);
+    }
+
+    public List<EventDTO> getEventsByHallUuid(UUID hallUuid) {
+        List<Event> eventEntitiesOpt = eventRepository.findAllByHallId(hallUuid);
+
+        return mapToDTOs(eventEntitiesOpt);
+    }
+
+
+    private List<EventDTO> mapToDTOs(List<Event> eventEntities){
+        return eventEntities.stream()
+                .map(eventMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

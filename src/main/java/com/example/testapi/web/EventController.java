@@ -39,6 +39,15 @@ public class EventController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/{uuid}")
+    public ResponseEntity<List<EventDTO>> getEventsByUserUuid(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(eventService.getEventsByUserUuid(uuid));
+    }
+    @GetMapping("/hall/{uuid}")
+    public ResponseEntity<List<EventDTO>> getEventsByHallUuid(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(eventService.getEventsByHallUuid(uuid));
+    }
+
     @DeleteMapping("/{uuid}")
     public ResponseEntity<EventDTO> deleteEvent(@PathVariable UUID uuid) {
         Optional<EventDTO> eventDTO = eventService.getEventByUuid(uuid);
@@ -72,4 +81,5 @@ public class EventController {
         return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 
     }
+
 }
