@@ -21,10 +21,13 @@ public class Event {
     private String name;
     private LocalDate date;
     private int tickets;
+    private boolean featured;
+    private String phoneNumber;
     @JdbcTypeCode(Types.VARCHAR)
     private UUID hallId;
     @JdbcTypeCode(Types.VARCHAR)
     private UUID userId;
+    private boolean soldOut;
 
 
     public Long getId() {
@@ -81,6 +84,24 @@ public class Event {
         return this;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Event setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public Event setFeatured(boolean featured) {
+        this.featured = featured;
+        return this;
+    }
+
     public UUID getHallId() {
         return hallId;
     }
@@ -96,6 +117,15 @@ public class Event {
 
     public Event setUserId(UUID userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public boolean isSoldOut() {
+        return soldOut;
+    }
+
+    public Event setSoldOut(boolean soldOut) {
+        this.soldOut = soldOut;
         return this;
     }
 }

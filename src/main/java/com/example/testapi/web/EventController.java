@@ -48,6 +48,11 @@ public class EventController {
         return ResponseEntity.ok(eventService.getEventsByHallUuid(uuid));
     }
 
+    @GetMapping("/featured")
+    public ResponseEntity<List<EventDTO>> getFeaturedEvents() {
+        return ResponseEntity.ok(eventService.getFeaturedEvents());
+    }
+
     @DeleteMapping("/{uuid}")
     public ResponseEntity<EventDTO> deleteEvent(@PathVariable UUID uuid) {
         Optional<EventDTO> eventDTO = eventService.getEventByUuid(uuid);

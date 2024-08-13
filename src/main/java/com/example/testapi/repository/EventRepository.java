@@ -18,4 +18,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findAllByUserId(UUID uuid);
     List<Event> findAllByHallId(UUID uuid);
+
+    List<Event> findAllByFeatured(boolean featured);
 }

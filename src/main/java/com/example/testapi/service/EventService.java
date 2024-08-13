@@ -79,6 +79,12 @@ public class EventService {
         return mapToDTOs(eventEntitiesOpt);
     }
 
+    public List<EventDTO> getFeaturedEvents() {
+        List<Event> eventEntities = eventRepository.findAllByFeatured(true);
+
+        return mapToDTOs(eventEntities);
+    }
+
 
     private List<EventDTO> mapToDTOs(List<Event> eventEntities){
         return eventEntities.stream()

@@ -10,8 +10,11 @@ public class EventDTO {
     private String name;
     private LocalDate date;
     private int tickets;
+    private boolean featured;
+    private String phoneNumber;
     private UUID hallId;
     private UUID userId;
+    private boolean soldOut;
 
     public UUID getUuid() {
         return uuid;
@@ -58,6 +61,24 @@ public class EventDTO {
         return this;
     }
 
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public EventDTO setFeatured(boolean featured) {
+        this.featured = featured;
+        return this;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public EventDTO setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
     public UUID getHallId() {
         return hallId;
     }
@@ -73,6 +94,15 @@ public class EventDTO {
 
     public EventDTO setUserId(UUID userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public boolean isSoldOut() {
+        return soldOut;
+    }
+
+    public EventDTO setSoldOut(boolean soldOut) {
+        this.soldOut = soldOut;
         return this;
     }
 }
